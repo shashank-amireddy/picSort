@@ -1,0 +1,92 @@
+body{
+    margin: 0px;
+}
+
+.header{
+    background-color: rgb(132, 69, 69);
+    height: 4rem;
+}
+.content-body{
+    background-color: rgb(199, 142, 142);
+    height: 37rem;
+}
+.footer{
+    background-color: rgb(147, 69, 69);
+    height: 3.8rem;
+}
+.menu{
+    float: left;
+    background-color: aqua;
+    height: 100%;
+    width: 13rem;
+}
+/* IMAGE INPUT BEGIN */
+.select-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+} 
+
+.select-wrapper {
+    position: relative;
+    background-color: white;
+    width: 60%;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.select-wrapper .select-header span.close{
+    position: absolute;
+    display: block;
+    top: 6px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.select-wrapper .select-header {
+    background-color: tomato;
+    color: white;
+    font-size: 11px;
+    padding: 5px 10px;
+}
+
+.select-wrapper .select-content {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-preset {
+    margin: 5px;
+    margin-bottom: 15px;
+    width: 150px;
+    height: 100px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image-preset img{
+    width: 150px;
+    height: 100px;
+}
+
+.custom-upload .plus {
+    color: #c6c6c6;
+    font-weight: bolder;
+    font-size: 50px;
+    display: block;
+    padding: 16px 52px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 5px dashed #c6c6c6;
+    box-sizing: border-box;
+}
