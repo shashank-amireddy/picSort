@@ -303,6 +303,7 @@ canvas {
     font-size: 0.9rem;
     font-weight: 500;
     transition: opacity 0.2s;
+    white-space: nowrap;
 }
 
 .learn-more-link:hover {
@@ -365,5 +366,14 @@ canvas {
 
     .complexity-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .info-panel {
+        height: auto;
+    }
+
+    .info-header {
+        flex-wrap: wrap;
+        gap: 0.5rem;
     }
 }
