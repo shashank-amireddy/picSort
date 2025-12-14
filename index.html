@@ -1,79 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicSort - Visual Sorting Algorithms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Sorting visualized through images</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="select-overlay" id="select-pic">
-        <div class="select-wrapper">
-            <div class="select-headder">
-                <h1 class="select-title"> Select a picture</h1>
-                <span class="close" id="close-pic" data-close-id ="select-pic">✖</span>
+    <div class="app-container">
+        <!-- Sidebar Controls -->
+        <aside class="sidebar glass-panel">
+            <div class="logo-area">
+                <h1>PicSort</h1>
+                <p class="subtitle">Visualizing Algorithms</p>
             </div>
-                <div class="image-preset">
-                    <img src="presets/grayscale.jpg">
-                </div>
-                <div class="image-preset">
-                    <img src="presets/mountain.jpg">
-                </div>
-                <div class="image-preset">
-                    <img src="presets/kitty.jpg">
-                </div>
-                <div class="image-preset custom-upload">
-                    <input id="input-file" name="input_file" type="file" accept="image/*" name="image">
-                    <label class="plus" for="input-file">+</label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="header">
-            hi
-        </div>
-        <div class="content-body" id="content">
-            <div class="menu" id="menu">
-                <form id="form">
-                    <div class="input-group">
-                        <input class="button width-100 btn-modal" id="btn-select-image" data-open-id="select-pic" type='button' value="Select an Image"/>
-                    </div>
-                    <div class="input-group">
-                        <label for="algorithm">Algorithm: </label>
-                        <select class="width-100" name="algorithm" id="algorithm">
+
+            <div class="controls-section">
+                <div class="control-group">
+                    <label for="algorithm">Algorithm</label>
+                    <div class="select-wrapper">
+                        <select id="algorithm" name="algorithm">
                             <option value="insertion_sort">Insertion Sort</option>
                             <option value="selection_sort">Selection Sort</option>
+                            <option value="bubble_sort">Bubble Sort</option>
                             <option value="quick_sort">Quick Sort</option>
                             <option value="merge_sort">Merge Sort</option>
-                            <option value="bubble_sort">Bubble Sort</option>
-                            <option value="comb_sort">Comb Sort</option>
-                            <option value="odd_even_sort">Odd Even Sort</option>
-                            <option value="cocktail_sort">Cocktail Sort</option>
-                            <option value="shell_sort">Shell Sort</option>
                             <option value="heap_sort">Heap Sort</option>
+                            <option value="shell_sort">Shell Sort</option>
+                            <option value="comb_sort">Comb Sort</option>
+                            <option value="cocktail_sort">Cocktail Sort</option>
+                            <option value="odd_even_sort">Odd Even Sort</option>
                         </select>
                     </div>
-                        <div class="input-group">
-                            <label for="delay">Delay: </label>
-                            <input class="width-100" type="range" min="0" max="200" value="50" name="delay" id="delay">
-                        </div>
-                        <div class="button-group">
-                            <input class="button width-50" id='btn-play' type="submit" value="Start"/>
-                            <input class="button width-50" id='btn-reset' type="reset" value="Reset"/>
+                </div>
+
+                <div class="control-group">
+                    <label for="delay">Speed</label>
+                    <div class="range-wrapper">
+                        <input type="range" id="delay" name="delay" min="0" max="200" value="50">
+                        <span id="delay-val">50ms</span>
                     </div>
-                    <span id="status"></span>
-                </form>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btn-play" class="btn btn-primary">
+                        <span class="icon">▶</span> Start Sorting
+                    </button>
+                    <button id="btn-reset" class="btn btn-secondary">
+                        <span class="icon">↺</span> Reset
+                    </button>
+                </div>
             </div>
-            <div class="canvas">
+
+            <div class="image-selection-section">
+                <h3>Select Image</h3>
+                <div class="presets-grid" id="presets-container">
+                    <!-- Presets will be injected here by JS -->
+                </div>
+                <div class="custom-upload-wrapper">
+                    <input type="file" id="input-file" accept="image/*" hidden>
+                    <label for="input-file" class="btn btn-outline width-100">Upload Custom Image</label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="canvas-container glass-panel">
                 <canvas id="board"></canvas>
+                <div id="status-overlay" class="status-overlay">
+                    <span id="status-text">Ready to Sort</span>
+                </div>
             </div>
-        </div>
-        <div class="footer" id="footer">
-            yoo
-        </div>
+
+            <!-- Educational Info Panel -->
+            <div class="info-panel glass-panel">
+                <div class="info-header">
+                    <h2 id="algo-title">Algorithm Name</h2>
+                    <a href="#" id="algo-link" target="_blank" class="learn-more-link">Learn on GeeksforGeeks ↗</a>
+                </div>
+                <p id="algo-desc" class="algo-description">Select an algorithm to see how it works.</p>
+                
+                <div class="complexity-grid">
+                    <div class="complexity-item">
+                        <span class="label">Time (Best)</span>
+                        <span class="value" id="time-best">-</span>
+                    </div>
+                    <div class="complexity-item">
+                        <span class="label">Time (Average)</span>
+                        <span class="value" id="time-avg">-</span>
+                    </div>
+                    <div class="complexity-item">
+                        <span class="label">Time (Worst)</span>
+                        <span class="value" id="time-worst">-</span>
+                    </div>
+                    <div class="complexity-item">
+                        <span class="label">Space Complexity</span>
+                        <span class="value" id="space-complexity">-</span>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    
 </body>
 </html>
